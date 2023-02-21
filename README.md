@@ -10,7 +10,7 @@ GetFreeInCsuft 项目致力于使广大 Csufter 能够较为舒服的使用校�
 
 ## :bookmark_tabs:项目说明
 
-由于该 Mentohust 项目十分久远，源码已经找不到了，找到了一个魔改版本：[zzurj](https://github.com/2512500960/zzurj)，总之基于 802.1x 的认证包结构大致都差不多，所以基本上就是针对这个项目进行了部分魔改，更改了部分字段的偏移量，总之目前暂时能用了，隐藏 Bug 应该不会少，有问题请提 Issues 或 [QQ群：389616405](http://qm.qq.com/cgi-bin/qm/qr?k=td39yJcSImsmP0I7iDCczotSoidZSlu8&authKey=mPDT%2FxK5te0PmmYabvUMShHlBAYC%2BW9BoCBqCr%2BH8pvvD0vzsgpo4usIbjPz0MYX&group_code=389616405)
+由于该 Mentohust 项目十分久远，源码已经找不到了，找到了一个魔改版本：[zzurj](https://github.com/2512500960/zzurj)，总之基于 802.1x 的认证包结构大致都差不多，所以基本上就是针对这个项目进行了部分魔改，更改了部分字段的偏移量，总之目前暂时能用了，隐藏 Bug 应该不会少，有问题请提 Issues 或 [QQ群：389616405](https://qm.qq.com/cgi-bin/qm/qr?k=Fn2dZQUkubDl_rA8E-Yv8kcut5fzGML2&jump_from=webapi&authKey=1Om2MmWG3CbOakrQf257j1eCX+WpRbQAYABGYfE3SB19bzlzc0S5hRpZCKcnJVrR)
 
 ## :pencil2: 项目使用
 
