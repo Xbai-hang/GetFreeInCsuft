@@ -1429,7 +1429,7 @@ UINT CertThreadFunc( LPVOID pParam )
 				if (sLen != 0)
 				{
 					char *serverMsg = new char[sLen-1];
-					memcpy(serverMsg, pRecvBuf+0x1c, sLen-2);
+					memcpy(serverMsg, pRecvBuf+0x1e, sLen-2);
 					serverMsg[sLen-2] = '\0';
 					mainDlg->m_sServerMsg = serverMsg;
 					delete []serverMsg;
@@ -1450,7 +1450,7 @@ UINT CertThreadFunc( LPVOID pParam )
 				if (sLen != 0)
 				{
 					char *serverMsg = new char[sLen-1];
-					memcpy(serverMsg, pRecvBuf+0x1c, sLen-2);
+					memcpy(serverMsg, pRecvBuf+0x1e, sLen-2);
 					serverMsg[sLen-2] = '\0';
 					mainDlg->m_sServerMsg = serverMsg;
 					delete []serverMsg;
@@ -1515,7 +1515,7 @@ int CMentoHUSTDlg::InitStartPacket(byte* startpacket)
 	memcpy(temp + 0x12, dhcpinfo, 23);
 	CGetHDSerial hdserial;
 	char* hdserialchar = hdserial.GetHDSerial(); // 20
-	memcpy(temp + 0x1b7, hdserialchar, strlen(hdserialchar));
+	memcpy(temp + 0x1bb, hdserialchar, strlen(hdserialchar));
 	memcpy_s(startpacket, 591, temp, 591);
 	return 591;
 }
@@ -1535,23 +1535,26 @@ int CMentoHUSTDlg::InitIdentifyPacket(byte* identifypacket)
 
 	int xuehaochangdu = len1;
 	//identify_packet是学号8位的时候抓的包，所以如果学号长度要是多于8位的话，需要往后移动一下
-	int size = 604;
+	// 凡是大于 23 字节的都需要偏移 xuehaochangdu - 8 个字节
+	int size = 604 + xuehaochangdu - 8;
 	byte* temp = (byte*)malloc(size);
 
 	memset(temp, 0, size);
-	memcpy_s(temp, 604, identify_packet, 604);
-	memcpy(temp + 0x17, uname, 8);
-	//temp[17] = xuehaochangdu - 8 + 13;
-	//temp[21] = xuehaochangdu - 8 + 13;
+	memcpy_s(temp, 23, identify_packet, 23);
+	memcpy_s(temp + 23 + xuehaochangdu, size - 23 - xuehaochangdu, identify_packet + 23 + 8, 604 - 23 - 8);
+	// 0x17 == 23
+	memcpy(temp + 0x17, uname, xuehaochangdu);
+	temp[17] = xuehaochangdu - 8 + 13;
+	temp[21] = xuehaochangdu - 8 + 13;
 	memcpy_s(temp + 0x06, 6, m_bLocalMAC, 6);
-	memcpy_s(temp + 0xa1, 6, m_bLocalMAC, 6);
+	memcpy_s(temp + 0xa1 + xuehaochangdu - 8, 6, m_bLocalMAC, 6);
 	memcpy_s(temp, 6, m_bDestMAC, 6);
 	UINT8* dhcpinfo = getdhcpinfo();
-	memcpy(temp + 0x1f, dhcpinfo, 23);
+	memcpy(temp + 0x1f + xuehaochangdu - 8, dhcpinfo, 23);
 
 	CGetHDSerial hdserial;
 	char* hdserialchar = hdserial.GetHDSerial();
-	memcpy(temp + 0x1c4, hdserialchar, strlen(hdserialchar));
+	memcpy(temp + 0x1c8 + xuehaochangdu - 8, hdserialchar, strlen(hdserialchar));
 
 
 	//设置response id为请求的request id
@@ -1594,17 +1597,19 @@ int CMentoHUSTDlg::InitMD5ChallengePacket(byte* packet)
 	
 
 	int xuehaochangdu = len1;
-	int size = 621;
+	int size = 621 + xuehaochangdu - 8;
 	byte* temp = (byte*)malloc(size);
 	memset(temp, 0x00, size);
-
-	memcpy(temp, md5challenge_packet, 621);
+	// md5 包里面需要偏移 28个字节
+	memcpy(temp, md5challenge_packet, 0x28);
+	memcpy(temp + 0x28 + xuehaochangdu, md5challenge_packet + 0x28 + 8, 621 - 0x28 - 8);
+	memcpy(temp + 0x28, uname, xuehaochangdu);
 
 	memcpy_s(temp + 0x06, 6, m_bLocalMAC, 6);
-	memcpy_s(temp + 0xb2, 6, m_bLocalMAC, 6);
+	memcpy_s(temp + 0xb2 + xuehaochangdu - 8, 6, m_bLocalMAC, 6);
 	memcpy_s(temp, 6, m_bDestMAC, 6);
 	UINT8* dhcpinfo = getdhcpinfo();
-	memcpy(temp + 0x30, dhcpinfo, 23);
+	memcpy(temp + 0x30 + xuehaochangdu - 8, dhcpinfo, 23);
 
 	unsigned char* checkpass = checkPass(m_requestID[0], m_bMD5SeedV3, 16, pass);
 	memcpy(temp + 0x18, checkpass, 0x10);
@@ -1628,8 +1633,9 @@ int CMentoHUSTDlg::InitMD5ChallengePacket(byte* packet)
 	//memcpy(temp + 0x129, v3hash, 128);
 	CGetHDSerial hdserial;
 	char* hdserialchar = hdserial.GetHDSerial();
-	memcpy(temp + 0x1d5, hdserialchar, strlen(hdserialchar));
+	memcpy(temp + 0x1d9 + xuehaochangdu - 8, hdserialchar, strlen(hdserialchar));
 	//设置response id为请求的request id
+	// 0x13 == 19
 	memcpy(temp + 0x13, m_requestID, 0x1);
 	memcpy_s(packet, size, temp, size);
 	return size;

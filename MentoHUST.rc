@@ -177,14 +177,14 @@ BEGIN
     BEGIN
         BLOCK "080404b0"
         BEGIN
-            VALUE "CompanyName", "?"
+            VALUE "CompanyName", "笨蛋哪里有这个吖"
             VALUE "FileDescription", "适用于Csuft的校园网认证程序"
             VALUE "FileVersion", "3.1"
-            VALUE "LegalCopyright", "?"
-            VALUE "LegalTrademarks", "？"
+            VALUE "LegalCopyright", "Xbai-hang"
+            VALUE "LegalTrademarks", "笨蛋哪里有这个吖"
             VALUE "OriginalFilename", "MentoHUST.exe"
             VALUE "ProductName", "锐捷认证助手"
-            VALUE "ProductVersion", "1.1"
+            VALUE "ProductVersion", "1.2"
         END
     END
     BLOCK "VarFileInfo"
@@ -367,7 +367,7 @@ BEGIN
     IDS_CANCEL              "取消"
     IDS_WNDCAPTION          "适用于 Csuft 的锐捷认证程序"
     IDS_RUIJIE_ERG          "SOFTWARE\\锐捷网络\\Ruijie Supplicant"
-    IDS_LINKURL             "http://www.csuft.edu.cn/"
+    IDS_LINKURL             "https://github.com/Xbai-hang/GetFreeInCsuft/releases/"
     IDS_LINKTIP             "QQ群：389616405"
     IDS_FIND_NONIC          "找不到网卡！"
     IDS_NO_CLIENTCHECK      ">> 该版本没有客户端校验。"
