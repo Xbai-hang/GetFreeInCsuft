@@ -10,13 +10,13 @@ GetFreeInCsuft 项目致力于使广大 Csufter 能够较为舒服的使用校�
 
 ## :bookmark_tabs:项目说明
 
-由于该 Mentohust 项目十分久远，源码已经找不到了，找到了一个魔改版本：[zzurj](https://github.com/2512500960/zzurj)，总之基于 802.1x 的认证包结构大致都差不多，所以基本上就是针对这个项目进行了部分魔改，更改了部分字段的偏移量，总之目前暂时能用了，隐藏 Bug 应该不会少，有问题请提 Issues 或 [QQ群：389616405](https://qm.qq.com/cgi-bin/qm/qr?k=Fn2dZQUkubDl_rA8E-Yv8kcut5fzGML2&jump_from=webapi&authKey=1Om2MmWG3CbOakrQf257j1eCX+WpRbQAYABGYfE3SB19bzlzc0S5hRpZCKcnJVrR)
+由于 Mentohust 项目十分久远，源码已经找不到了，找到一个魔改版本：[zzurj](https://github.com/2512500960/zzurj)，总之基于 802.1x 的认证包结构大致都差不多，所以基本上就是针对这个项目进行了部分魔改，更改了部分字段的偏移量，目前暂时能用了，隐藏 Bug 应该不会少，有问题请提 Issues 或 [QQ群：389616405](https://qm.qq.com/cgi-bin/qm/qr?k=Fn2dZQUkubDl_rA8E-Yv8kcut5fzGML2&jump_from=webapi&authKey=1Om2MmWG3CbOakrQf257j1eCX+WpRbQAYABGYfE3SB19bzlzc0S5hRpZCKcnJVrR)。
 
 ## :pencil2: 项目使用
 
 For Windows:
 
-- 请直接在 Release 中下载最新版本，32 位操作系统选则 x86，64 位操作系统选择 x64
+- 请直接在 Release 中下载最新版本
 
 For Linux:
 
@@ -82,7 +82,24 @@ For Mac：
 
 ## 版本说明
 
+### V1.2
+
+第二次编译，完成了以下问题：
+
+- [x] 适配了研究生账号
+- [x] 修复了认证成功/失败时提示文字缺失最后一个字的 Bug
+- [x] 简化了操作流程，进一步压缩了空间（6Mb ==> 3Mb）
+- [x] 编译的 32 位程序，故而无需区分 32 位或 64 位操作系统
+
+待解决问题：
+
+- [ ] 部分同学出现锐捷官方账号可以认证，使用本程序 **无法连接到认证服务器** 的问题
+- [ ] 移动用户出现 **用户动态 IP 地址类型绑定错误** 的问题
+- [ ] 西园 17 栋似乎都无法使用？疑似走的不是同一个策略
+
 ### V1.1
 
-- 第一次编译，<del>仅针对电信认证进行抓包更改字段偏移量，未对移动、联通账号进行测试，不过按照推算应该是都一样的。</del>，已测试电信、移动、联通账号均可正常认证，目前西园 17栋、东园27栋出现获取到 IP 无法连接认证服务器的情况
+第一次编译
+
+- <del>仅针对电信认证进行抓包更改字段偏移量，未对移动、联通账号进行测试，不过按照推算应该是都一样的。</del>，已测试电信、移动、联通账号均可正常认证，目前西园 17栋、东园27栋出现获取到 IP 无法连接认证服务器的情况
 - 已将 dll 文件打包，故小助手程序本体不止 `1Mb`，x86 对应 32 位操作系统，x64 对应 64 位操作系统
